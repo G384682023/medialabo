@@ -31,17 +31,16 @@ function hantei() {
    else if(yoso == kotae){
     console.log("正解です．おめでとう!");
    }
-   else{
-    if(kaisu == 3){
-        console.log("まちがい．残念でした答えは"+ kotae +"です．");
-    }
+   else if(kaisu == 3){
+    console.log("まちがい．残念でした答えは"+ kotae +"です．");
+   }
     else if(kaisu >= 2 && yoso < kotae){
         console.log("まちがい．答えはもっと大きいですよ");
     }
     else if(kaisu >= 2 && yoso >kotae){
         console.log("まちがい．答えはもっと小さいですよ");
     }
-   }
+   
 
    
   
