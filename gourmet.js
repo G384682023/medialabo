@@ -201,3 +201,16 @@ let data = {
 
 /////////// 課題3-2 ここからプログラムを書こう
 
+console.log(data.results.shop[0].name);
+console.log(data.results.shop[0].genre.name);
+console.log(data.results.shop[0].address);
+console.log(data.results.shop[0].budget_name);
+console.log(data.results.shop[0].open);
+console.log(data.results.shop[0].station_name);
+
+console.log(data.results.shop[1].name);
+console.log(data.results.shop[1].genre.name);
+console.log(data.results.shop[1].address);
+console.log(data.results.shop[1].budget_name);
+console.log(data.results.shop[1].open);
+console.log(data.results.shop[1].station_name);
