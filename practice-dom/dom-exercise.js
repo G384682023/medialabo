@@ -14,9 +14,8 @@ let data = [
 //// 注意: 以上は編集しないこと!
 
 // 練習4-2 メッセージ追加プログラム
-let h2 = document.querySelector("h2#ex42");
 let p = document.createElement('p'); 
-
+h2 = document.querySelector("h2#ex42");
 p.textContent = '写真集と都市の緯度経度のページです';
 h2.insertAdjacentElement('afterend', p); 
 p.style.textEmphasis='sesame green'; 
