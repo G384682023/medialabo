@@ -198,6 +198,53 @@ let data = {
     ]
   }
 };
+function displayData() {
+  const resultDiv = document.getElementById('result');
+  let htmlContent = '';
+
+  data.results.shop.forEach(shop => {
+    htmlContent += `
+      <h2>${shop.name}</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ジャンル</th>
+            <th>${shop.genre.name}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>住所</th>
+            <td>${shop.address}</td>
+          </tr>
+          <tr>
+            <th>予算</th>
+            <td>${shop.budget.name}</td>
+          </tr>
+          <tr>
+            <th>営業時間</th>
+            <td>${shop.open}</td>
+          </tr>
+          <tr>
+            <th>最寄駅</th>
+            <td>${shop.station_name}</td>
+          </tr>
+        </tbody>
+      </table>
+    `;
+  });
+
+  resultDiv.innerHTML = htmlContent;
+}
+
+document.getElementById('searchButton').addEventListener('click', () => {
+  const searchKey = document.getElementById('searchKey').value;
+  console.log('検索キー:', searchKey);
+
+  displayData();
+});
+
+displayData();
 
 /////////// 課題3-2 ここからプログラムを書こう
 
