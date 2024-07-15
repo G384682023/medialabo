@@ -14,33 +14,35 @@ let data = [
 //// 注意: 以上は編集しないこと!
 
 // 練習4-2 メッセージ追加プログラム
-// メッセージを作成して挿入する
-let message = document.createElement('p');
-message.textContent = '写真集と都市の緯度経度のページです';
-
-let h2 = document.querySelector("h2#ex42");
-h2.insertAdjacentElement('afterend', message); 
-
-
+let p1=document.querySelector('h2#ex42');
+let p = document.createElement('p');
+p.textContent = '写真表と年の緯度軽度のページです';
+p1.insertAdjacentElement('afterend', p); 
+p.style.textEmphasis='sesame green';
 // 練習4-3 写真表作成プログラム
+let p2=document.querySelector('div#phototable');
+let pa = document.createElement('p');
+let img = document.createElement('img');
+img.setAttribute('src','taro.png');
+pa.insertAdjacentElement('beforeend', img);
+p2.insertAdjacentElement('beforeend', pa);
 
-div = document.querySelector('div#phototable');
-let p1 = document.createElement('img');
-p1.setAttribute('src','taro.png');
-p.insertAdjacentElement('beforeend', p1);
-div.insertAdjacentElement('beforeend', p);
 
-let p10 = document.createElement('p'); 
-let p11 = document.createElement('img');
-p11.setAttribute('src','jiro.png');
-p10.insertAdjacentElement('beforeend', p11);
-div.insertAdjacentElement('beforeend', p10);
 
-let p20 = document.createElement('p'); 
-let p21 = document.createElement('img');
-p21.setAttribute('src','hanako.png');
-p20.insertAdjacentElement('beforeend', p21);
-div.insertAdjacentElement('beforeend', p20);
+
+let pp = document.createElement('p');
+let img1 = document.createElement('img');
+img1.setAttribute('src','jiro.png');
+pp.insertAdjacentElement('beforeend', img1);
+p2.insertAdjacentElement('beforeend', pp);
+
+
+ 
+let ppp = document.createElement('p');
+let img2 = document.createElement('img');
+img2.setAttribute('src','hanako.png');
+ppp.insertAdjacentElement('beforeend', img2);
+p2.insertAdjacentElement('beforeend', ppp);
 
 
 // 練習4-4 箇条書き削除プログラム
