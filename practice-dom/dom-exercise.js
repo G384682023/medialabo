@@ -15,10 +15,11 @@ let data = [
 
 // 練習4-2 メッセージ追加プログラム
 let p = document.createElement('p'); 
-h2 = document.querySelector("h2#ex42");
 p.textContent = '写真集と都市の緯度経度のページです';
+p.style.textEmphasis = 'sesame green';
+
+let h2 = document.querySelector("h2#ex42");
 h2.insertAdjacentElement('afterend', p); 
-p.style.textEmphasis='sesame green'; 
 
 
 // 練習4-3 写真表作成プログラム
