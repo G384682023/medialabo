@@ -198,6 +198,13 @@ let data = {
     ]
   }
 };
+
+print(data);
+
+function print(data){
+
+
+
 function displayData() {
   const resultDiv = document.getElementById('result');
   let htmlContent = '';
@@ -261,3 +268,5 @@ console.log(data.results.shop[1].address);
 console.log(data.results.shop[1].budget_name);
 console.log(data.results.shop[1].open);
 console.log(data.results.shop[1].station_name);
+
+}
