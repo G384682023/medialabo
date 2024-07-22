@@ -5,98 +5,118 @@
     <title>課題1-4</title>
     <link rel="stylesheet" href="project.css">
     <script src="gourmet.js " defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
   </head>
-  <form id="searchForm">
-    <label for="searchKey">検索キー:</label>
-    <input type="text" id="searchKey" name="searchKey">
-    <button type="button" id="searchButton">検索</button>
-  </form>
-   
-  <body>
-    <h1>グルメの検索結果</h1>
-    <p>検索キー:ダイニングバー・バル</p>
-    <p>2件がヒットしました。</p>
-    <div id="result"></div>
+    <body>
+    
+      <h1>検索してね</h1>
 
-    <!-- <h2>1件目: バグダッドカフェ Bagdadcafe/モータウン MOTOWN</h2>
+      <form id="searchForm">
+        <label for="searchKey">検索キー:</label>
+        <select name="santaro" id="santaro">
+          <option value="">   </option>
+          <option value="G001">居酒屋</option>
+          <option value="G002">ダイニングバー・バル</option>
+          <option value="G003">創作料理</option>
+          <option value="G004">和食</option>
+          <option value="G005">洋食</option>
+          <option value="G006">イタリアン・フレンチ</option>
+          <option value="G007">中華</option>
+          <option value="G008">焼肉・ホルモン</option>
+          <option value="G009">アジア・エスニック料理</option>
+          <option value="G0010">各国料理</option>
+          <option value="G0011">カラオケ・パーティー</option>
+          <option value="G0012">バー・カクテル</option>
+          <option value="G0013">ラーメン</option>
+          <option value="G0014">カフェ・スイーツ</option>
+          <option value="G0015">その他グルメ</option>
+          <option value="G0016">お好み焼き・もんじゃ</option>
+          <option value="G0017">韓国料理</option>
+        </select>
+        <button id="searchButton">検索</button>
+      </form>
+    
+      <div id="result"></div>
+    
+    
+    </body>
+  </html>
+
+<!-- <h2>1件目: <id shop[0].name></id></h2>
         <table>
           <thead>
-            <tr>
+            <tr>検索して追加
               <th scope="col">ジャンル</th>
-              <th scope="col">居酒屋</th>
+              <th scope="col" id = shop[0].jenre.name></th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row">アクセス</th>
-              <td>京王八王子駅1分/JR八王子駅北口5分</td>
+              <td><id access></id></td>
             </tr>
             <tr>
               <th scope="row">住所</th>
-              <td>東京都八王子市明神町４-6-12　ホテル・ザ・ビー八王子（旧八王子プラザホテル）2F</td>
+              <td><id shop.ddress[0]></id></td>
             </tr>
             <tr>
               <th scope="row">予算</th>
-              <td>¥3001~4000</td>
+              <td><id shop.budget.name[0]></id></td>
             </tr>
             <tr>
               <th scope="row">キャッチコピー</th>
-              <td>【サプライズ演出有】 結婚パーティー受付中</td>
+              <td><id shop.catch[0]></id></td>
             </tr>
             <tr>
               <th scope="row">営業時間</th>
-              <td>月～日、祝日、祝前日: 17:00～21:00 （料理L.O. 20:00 ドリンクL.O. 20:00）</td>
+              <td><id shop.open[0]></id></td>
             </tr>
             <tr>
               <th scope="row">最寄駅</th>
-              <td>京王八王子駅</td>
+              <td><id shop.station_name[0]></id></td>
             </tr>
             <tr>
               <th scope="row">サブジャンル</th>
-              <td>ダイニングバー・バル</td>
+              <td><id shop.sub_genre.name[0]></id></td>
             </tr>
           </tbody>
         </table>
 
-    <h2>2件目: 隠れ家バル Funny&Bouquet</h2>
+    <h2>2件目: <id shop.name[1]></id></h2>
     <table>
       <thead>
         <tr>
           <th scope="col">ジャンル</th>
-          <th scope="col">居酒屋</th>
+          <th scope="col" id = shop.jenre.name[1]></th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <th scope="row">アクセス</th>
-          <td>ＪＲ八王子駅北口徒歩1分/京王八王子駅徒歩3分</td>
+          <td><id shop.obile_access[1]></id></td>
         </tr>
         <tr>
           <th scope="row">住所</th>
-          <td>東京都八王子市東町12-14</td>
+          <td><id shop.ddress[1]></id></td>
         </tr>
         <tr>
           <th scope="row">予算</th>
-          <td>¥2001 ~ ¥3000</td>
+          <td><id shop.budget.name[1]></id></td>
         </tr>
         <tr>
           <th scope="row">キャッチコピー</th>
-          <td>2.5時間飲み放題付2000円~ 【★少人数様ソファー★】</td>
+          <td><id shop.catch[1]></id></td>
         </tr>
         <tr>
           <th scope="row">営業時間</th>
-          <td>月～日、祝日、祝前日: 17:00～翌5:00 （料理L.O. 翌3:00 ドリンクL.O. 翌4:00）</td>
+          <td><id shop.open[1]></id></td>
         </tr>
         <tr>
           <th scope="row">最寄駅</th>
-          <td>八王子駅</td>
+          <td><id shop.station_name[1]></id></td>
         </tr>
         <tr>
           <th scope="row">サブジャンル</th>
-          <td>ダイニングバー・バル</td>
-        </tr> 
-      </tbody>
-    </table>-->
-
-  </body>
-</html>
+          <td><id shop.sub_genre.name[1]></id></td>
+        </tr>
+      </tbody> -->
