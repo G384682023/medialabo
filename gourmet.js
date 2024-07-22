@@ -1,92 +1,111 @@
-
+// 検索結果を表示する関数
 function print(data) {
   console.log("検索結果を表示します");
 
   const resultDiv = document.getElementById('result');
   
-  // 前回の検索結果をクリア
-  while (resultDiv.firstChild) {
-      resultDiv.removeChild(resultDiv.firstChild);
-  }
+  // 以前の結果をクリア
+  resultDiv.innerHTML = '';
 
+  let count = 1;
+
+  // データの各店舗について処理
   for (let i of data.results.shop) {
-      let table = document.createElement('table');
-      let thead = document.createElement('thead');
-      let tbody = document.createElement('tbody');
+    let containerDiv = document.createElement('div');
+    
+    // 店名を表示
+    let storeNameHeading = document.createElement('h3');
+    storeNameHeading.innerHTML = `<em>検索結果${count}件目</em>`;
+    let storeName = document.createElement('p');
+    storeName.textContent = i.name;
+    storeNameHeading.appendChild(storeName);
+    containerDiv.appendChild(storeNameHeading);
 
-      let headers = ["ジャンル", "アクセス", "住所", "予算", "キャッチコピー", "営業時間", "最寄駅", "サブジャンル"];
-      let values = [i.genre.name, i.access, i.address, i.budget.name, i.catch, i.open, i.station_name, i.sub_genre.name];
+    // テーブルを作成
+    let table = document.createElement('table');
+    let thead = document.createElement('thead');
+    let tbody = document.createElement('tbody');
 
-      for (let j = 0; j < headers.length; j++) {
-          let row = document.createElement('tr');
-          let th = document.createElement('th');
-          let td = document.createElement('td');
+    // テーブルのヘッダーとデータ
+    let headers = ["ジャンル", "住所", "予算", "営業時間", "最寄駅"];
+    let values = [i.genre.name, i.address, i.budget.name, i.open, i.station_name];
 
-          th.textContent = headers[j];
-          td.textContent = values[j];
+    // テーブルのヘッダーを作成
+    let headerRow = document.createElement('tr');
+    let headerTh1 = document.createElement('th');
+    headerTh1.textContent = "項目";
+    let headerTh2 = document.createElement('th');
+    headerTh2.textContent = "詳細";
+    headerRow.appendChild(headerTh1);
+    headerRow.appendChild(headerTh2);
+    thead.appendChild(headerRow);
 
-          row.appendChild(th);
-          row.appendChild(td);
-          tbody.appendChild(row);
-      }
+    // テーブルのデータ行を作成
+    for (let j = 0; j < headers.length; j++) {
+      let row = document.createElement('tr');
+      let th = document.createElement('th');
+      let td = document.createElement('td');
 
-      table.appendChild(thead);
-      table.appendChild(tbody);
-      resultDiv.appendChild(table);
+      th.textContent = headers[j];
+      td.textContent = values[j];
+
+      row.appendChild(th);
+      row.appendChild(td);
+      tbody.appendChild(row);
+    }
+
+    table.appendChild(thead);
+    table.appendChild(tbody);
+    containerDiv.appendChild(table);
+    resultDiv.appendChild(containerDiv);
+
+    count++;
   }
 }
 
-let b = document.querySelector('button#searchButton');
-b.addEventListener('click', sendRequest);
-
+// 検索リクエストを送信する関数
 function sendRequest(event) {
-  event.preventDefault(); 
+  event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
   let s = document.querySelector('select#santaro');
-  let idx = s.selectedIndex; 
+  let genre = s.value;
 
-  let os = s.querySelectorAll('option'); 
-  let o = os.item(idx); 
-
-  console.log('選択された ' + idx + ' 番目の option の情報:');
-  console.log('  value=' + o.getAttribute('value')); 
-  console.log('  textContent=' + o.textContent);
-
-  let genre = o.getAttribute('value');
   if (!genre) {
-      console.log('ジャンルが選択されていません');
-      return;
+    console.log('ジャンルが選択されていません');
+    return;
   }
 
-  // URL を設定
-  let url = 'https://www.nishita-lab.org/web-contents/jsons/hotpepper/' + genre + '.json';
+  // 選択されたジャンルに基づいてURLを構築
+  let url = `https://www.nishita-lab.org/web-contents/jsons/hotpepper/${genre}.json`;
 
-  // 通信開始
+  // Axiosでデータを取得
   axios.get(url)
-      .then(showResult)
-      .catch(showError)
-      .then(finish);
+    .then(showResult)
+    .catch(showError)
+    .then(finish);
 }
 
-// 通信が成功した時の処理
+// 通信成功時の処理
 function showResult(resp) {
-  // サーバから送られてきたデータを出力
   let data = resp.data;
 
-  // data が文字列型なら、オブジェクトに変換する
+  // 文字列型ならオブジェクトに変換
   if (typeof data === 'string') {
-      data = JSON.parse(data);
+    data = JSON.parse(data);
   }
+
   print(data);
 }
 
-// 通信エラーが発生した時の処理
+// 通信エラー時の処理
 function showError(err) {
   console.log(err);
 }
 
-// 通信の最後にいつも実行する処理
+// 通信終了後に実行する処理
 function finish() {
   console.log('Ajax 通信が終わりました');
 }
 
+// 検索ボタンにイベントリスナーを追加
+document.getElementById('searchButton').addEventListener('click', sendRequest);
