@@ -1,82 +1,78 @@
-// 検索結果を表示する関数
 function print(data) {
   console.log("検索結果を表示します");
 
-  const resultDiv = document.getElementById('result');
+  const r = document.getElementById('result');
   
-  // 以前の結果をクリア
-  resultDiv.innerHTML = '';
+  while (r.firstChild) {
+    r.removeChild(r.firstChild);
+  }
 
-  let count = 1;
+  let c = 1;
 
-  // データの各店舗について処理
   for (let i of data.results.shop) {
-    let containerDiv = document.createElement('div');
-    
-    // 店名を表示
-    let storeNameHeading = document.createElement('h3');
-    storeNameHeading.innerHTML = `<em>検索結果${count}件目</em>`;
-    let storeName = document.createElement('p');
-    storeName.textContent = i.name;
-    storeNameHeading.appendChild(storeName);
-    containerDiv.appendChild(storeNameHeading);
+    let h = document.createElement('h3');
+    let e = document.createElement('em');
+    e.textContent = `検索結果${c}件目`;
+    h.appendChild(e);
 
-    // テーブルを作成
-    let table = document.createElement('table');
+    let p = document.createElement('p');
+    p.textContent = i.name;
+
+    let d = document.createElement('div');
+    d.appendChild(h);
+    d.appendChild(p);
+
+    let t = document.createElement('table');
     let thead = document.createElement('thead');
     let tbody = document.createElement('tbody');
 
-    // テーブルのヘッダーとデータ
-    let headers = ["ジャンル", "住所", "予算", "営業時間", "最寄駅"];
-    let values = [i.genre.name, i.address, i.budget.name, i.open, i.station_name];
+    let thRow = document.createElement('tr'); // テーブルヘッダー行用
+    let th1 = document.createElement('th');
+    th1.textContent = "項目";
+    let th2 = document.createElement('th');
+    th2.textContent = "詳細";
+    thRow.appendChild(th1);
+    thRow.appendChild(th2);
+    thead.appendChild(thRow);
 
-    // テーブルのヘッダーを作成
-    let headerRow = document.createElement('tr');
-    let headerTh1 = document.createElement('th');
-    headerTh1.textContent = "項目";
-    let headerTh2 = document.createElement('th');
-    headerTh2.textContent = "詳細";
-    headerRow.appendChild(headerTh1);
-    headerRow.appendChild(headerTh2);
-    thead.appendChild(headerRow);
+    let headers = ["ジャンル", "アクセス", "住所", "予算", "キャッチコピー", "営業時間", "最寄駅", "サブジャンル"];
+    let values = [i.genre.name, i.access, i.address, i.budget.name, i.catch, i.open, i.station_name, i.sub_genre.name];
 
-    // テーブルのデータ行を作成
     for (let j = 0; j < headers.length; j++) {
       let row = document.createElement('tr');
       let th = document.createElement('th');
-      let td = document.createElement('td');
-
       th.textContent = headers[j];
+      let td = document.createElement('td');
       td.textContent = values[j];
-
       row.appendChild(th);
       row.appendChild(td);
       tbody.appendChild(row);
     }
 
-    table.appendChild(thead);
-    table.appendChild(tbody);
-    containerDiv.appendChild(table);
-    resultDiv.appendChild(containerDiv);
+    t.appendChild(thead);
+    t.appendChild(tbody);
+    d.appendChild(t);
+    r.appendChild(d);
 
-    count++;
+    c++;
   }
 }
+
 
 // 検索リクエストを送信する関数
 function sendRequest(event) {
   event.preventDefault(); // フォームのデフォルト送信を防ぐ
 
   let s = document.querySelector('select#santaro');
-  let genre = s.value;
+  let g = s.value;
 
-  if (!genre) {
+  if (!g) {
     console.log('ジャンルが選択されていません');
     return;
   }
 
   // 選択されたジャンルに基づいてURLを構築
-  let url = `https://www.nishita-lab.org/web-contents/jsons/hotpepper/${genre}.json`;
+  let url = `https://www.nishita-lab.org/web-contents/jsons/hotpepper/${g}.json`;
 
   // Axiosでデータを取得
   axios.get(url)
@@ -109,3 +105,4 @@ function finish() {
 
 // 検索ボタンにイベントリスナーを追加
 document.getElementById('searchButton').addEventListener('click', sendRequest);
+
